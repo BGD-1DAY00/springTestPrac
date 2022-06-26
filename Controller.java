@@ -1,7 +1,9 @@
 package com.executions.demo;
 
 import com.executions.demo.components.DateComponent;
+import com.executions.demo.components.EchoComponent;
 import com.executions.demo.components.HeadersComponent;
+import com.executions.demo.components.IPComponent;
 import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -62,25 +64,25 @@ public class Controller {
     }
 
     @GetMapping("/echo/**")
-    public Map<String, String> echo (HttpServletRequest request){
-        Map<String, String> map = new HashMap<>();
-        String r = request.getRequestURI();
-        System.out.println(r);
-        String requestURL = request.getRequestURI().substring(1);
-        System.out.print(requestURL);
-        String[] components = requestURL.split("/");
-        for (int i = 1; i < components.length; i++) {
-            String key = components[i];
-            String value = "";
-            try {
-                value = components[i + 1];
-            } catch (ArrayIndexOutOfBoundsException e) {
+    public EchoComponent echo (HttpServletRequest request){
+        return new EchoComponent(request.getRequestURI().substring(1));
+       // Map<String, String> map = new HashMap<>();
 
-            }
-            map.put(key, value);
-            i++;
-        }
-        return map;
+//        String requestURL = request.getRequestURI().substring(1);
+//
+//        String[] components = requestURL.split("/");
+//        for (int i = 1; i < components.length; i++) {
+//            String key = components[i];
+//            String value = "";
+//            try {
+//                value = components[i + 1];
+//            } catch (ArrayIndexOutOfBoundsException e) {
+//
+//            }
+//            map.put(key, value);
+//            i++;
+//        }
+//        return map;
     }
 
         @GetMapping("/validate/")
